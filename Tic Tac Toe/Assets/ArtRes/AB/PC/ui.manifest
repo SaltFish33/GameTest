@@ -1,0 +1,57 @@
+ManifestFileVersion: 0
+CRC: 2458264838
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 8c9d62c17c19d7ac145788ed15b85ae5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ceb56e24e8f4c1b36b603af65531852c
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 8c9d62c17c19d7ac145788ed15b85ae5
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9c7a0c11625de2b4d9f557309636d4ce, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5d1c88df32aa1a54ba2fb0814653266f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d7c4186ac2896fa4b94809b7c7b676a4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8c37cfc83ee81644eac74bf6830e5ff8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3aaefc4e8b8069f41a0506e235024a05, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.FontData
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/Bundles/UI/GamePanel.prefab
+Dependencies:
+- F:/unity/Tic Tac Toe/Assets/ArtRes/AB/PC/sprites
