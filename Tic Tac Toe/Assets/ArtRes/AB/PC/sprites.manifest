@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 4211230971
+CRC: 1003082210
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 198d95d7b6d1a3e17ea5105bc15e34c7
+    Hash: 1baf2f876ca65cced5f99019c0daed49
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2d8df09e698f722ada1caa03d3413830
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 198d95d7b6d1a3e17ea5105bc15e34c7
+    Hash: 1baf2f876ca65cced5f99019c0daed49
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -19,6 +19,9 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Bundles/Sprites/NormalGrid.png
+- Assets/Bundles/Sprites/AudioOff.png
+- Assets/Bundles/Sprites/Reset.png
+- Assets/Bundles/Sprites/AudioOn.png
 - Assets/Bundles/Sprites/BG.png
 - Assets/Bundles/Sprites/PlayerGrid.png
 - Assets/Bundles/Sprites/PCGrid.png

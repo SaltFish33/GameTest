@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2458264838
+CRC: 2676567192
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8c9d62c17c19d7ac145788ed15b85ae5
+    Hash: 455fe398f401cc5ff2e0e39e0dc44047
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ceb56e24e8f4c1b36b603af65531852c
+    Hash: 6e6acb57763512eee7cc17819c3c7c7b
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 8c9d62c17c19d7ac145788ed15b85ae5
+    Hash: 455fe398f401cc5ff2e0e39e0dc44047
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -22,6 +22,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 9c7a0c11625de2b4d9f557309636d4ce, type: 3}
 - Class: 114
@@ -48,10 +50,20 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
 - AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.FontData
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
 Assets:
-- Assets/Bundles/UI/GamePanel.prefab
+- Assets/Resources/UI/GamePanel.prefab
 Dependencies:
-- F:/unity/Tic Tac Toe/Assets/ArtRes/AB/PC/sprites
+- F:/KuRoGameTest/Tic Tac Toe/Assets/ArtRes/AB/PC/sprites

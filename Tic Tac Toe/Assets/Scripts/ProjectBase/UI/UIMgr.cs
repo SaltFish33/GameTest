@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -24,6 +26,8 @@ public enum E_UI_Layer
 public class UIMgr : BaseManager<UIMgr>
 {
     public Dictionary<string, BasePanel> panelDic = new Dictionary<string, BasePanel>();
+
+    private static readonly string ABName = "ui";
 
     //记录UI的canvas父对象
     public RectTransform canvas;
@@ -53,6 +57,12 @@ public class UIMgr : BaseManager<UIMgr>
     }
 
 
+    public async UniTask Init()
+    {
+        await AssetBundleHelper.LoadAssetBundle(ABName);
+    }
+
+
     /// <summary>
     /// 显示面板
     /// </summary>
@@ -78,7 +88,7 @@ public class UIMgr : BaseManager<UIMgr>
         //GameObject obj =  (GameObject)await AssetBundleHelper.LoadAsset(panelName, "ui", typeof(GameObject));
         //把它作为Canvas的子对象
         //并且要设置相对位置
-
+        
         Transform father = bot;
         switch (layer)
         {
@@ -195,6 +205,12 @@ public class UIMgr : BaseManager<UIMgr>
         entry.eventID = type;
         entry.callback.AddListener(callBack);
         trigger.triggers.Add(entry);
+    }
+
+
+    public void OnDestroy()
+    {
+        AssetBundleHelper.UnLoadAssetBundle(ABName);
     }
 
 }

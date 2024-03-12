@@ -13,9 +13,16 @@ public enum ScoreType
 
 public class Scoring : MonoBehaviour
 {
-    public Text playerScore;
-    public Text pcScore;
-    public Text drawScore;
+    private Text playerScore;
+    private Text pcScore;
+    private Text drawScore;
+
+    public void Init(Text player, Text pc, Text draw)
+    {
+        this.playerScore = player;
+        this.pcScore = pc;
+        this.drawScore = draw;
+    }
 
     public void Score(ScoreType type, int value)
     {

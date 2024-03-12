@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,11 +7,14 @@ public class GridLine : MonoBehaviour
 {
     public List<Grid> grids = new List<Grid>();
 
-    public void Init(UnityAction<Vector2Int> clickAction, Sprite normalSprite, Sprite playerSprite, Sprite pcSprite)
+    private int index;
+
+    public void Init(UnityAction<Vector2Int> clickAction, Sprite normalSprite, Sprite playerSprite, Sprite pcSprite, int index)
     {
+        this.index = index;
         for (int i = 0; i < grids.Count; i++) 
         {
-            grids[i].Init(clickAction, normalSprite, playerSprite, pcSprite);
+            grids[i].Init(clickAction, normalSprite, playerSprite, pcSprite, new Vector2Int(index, i));
         }
     }
 

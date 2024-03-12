@@ -265,6 +265,7 @@ Application.streamingAssetsPath;
 
     /// <summary>
     /// 用于检测资源热更新的函数
+    /// TODO：用UniTask重写
     /// </summary>
     /// <param name="overCallBack"></param>
     /// <param name="updateInfoCallBack"></param>

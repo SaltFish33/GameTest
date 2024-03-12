@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public enum GridStatus
 {
@@ -14,7 +15,7 @@ public enum GridStatus
 
 public class Grid : MonoBehaviour, IPointerClickHandler
 {
-    public Vector2Int pos;
+    private Vector2Int pos;
 
     private UnityAction<Vector2Int> clickAction;
     private GridStatus status;
@@ -25,8 +26,9 @@ public class Grid : MonoBehaviour, IPointerClickHandler
     private Sprite pcSprite;
 
     private bool isEnable;
-    public void Init(UnityAction<Vector2Int> clickAction, Sprite normalSprite, Sprite playerSprite, Sprite pcSprite)
+    public void Init(UnityAction<Vector2Int> clickAction, Sprite normalSprite, Sprite playerSprite, Sprite pcSprite, Vector2Int pos)
     {
+        this.pos = pos;
         this.clickAction = clickAction;
         image = GetComponent<Image>();
         status = GridStatus.Null;
@@ -40,12 +42,16 @@ public class Grid : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!isEnable) return;
-        Click(GridStatus.Player);
-        clickAction?.Invoke(pos);
+        var tween = Click(GridStatus.Player);
+        tween.onComplete += () =>
+        {
+            clickAction?.Invoke(pos);
+        };
     }
 
-    public void Click(GridStatus status)
+    public Tween Click(GridStatus status)
     {
+        MusicMgr.Instance.PladySoundByAB(AudioClipDefine.OnClick, false);
         this.status = status;
         switch (status)
         {
@@ -56,8 +62,10 @@ public class Grid : MonoBehaviour, IPointerClickHandler
                 image.sprite = pcSprite;
                 break;
         }
-        
+        transform.localScale = Vector3.zero;
+        var tween = transform.DOScale(Vector3.one, 0.2f);
         isEnable = false;
+        return tween;
     }
 
     public void ResetGrid()

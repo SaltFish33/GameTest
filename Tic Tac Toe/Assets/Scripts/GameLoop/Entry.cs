@@ -5,9 +5,40 @@ using UnityEngine;
 
 public class Entry : MonoBehaviour
 {
+    [Header("是否需要热更")]
+    public bool needUpdate;
     private void Awake()
     {
-        GameManager.Instance.Init();
+        Init();
+    }
+
+    private void Init()
+    {
+        UIMgr.Instance.ShowPanel<LoadingPanel>("LoadingPanel", E_UI_Layer.Mid, async (panel) =>
+        {
+            if (needUpdate)
+            {
+                ABUpdateMgr.Instance.CheckUpdate(async (isOver) =>
+                {
+                    if (!isOver) return;
+                    AssetBundleHelper.Init();
+                    await SpritesMgr.Instance.Init();
+                    await MusicMgr.Instance.Init();
+                    GameManager.Instance.Init();
+                },
+                (str) =>
+                {
+                    panel.SetDescrition(str);
+                });
+            }
+            else
+            {
+                AssetBundleHelper.Init();
+                await SpritesMgr.Instance.Init();
+                await MusicMgr.Instance.Init();
+                GameManager.Instance.Init();
+            }
+        });
 
         
     }
@@ -15,5 +46,8 @@ public class Entry : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.Instance.OnDestroy();
+        SpritesMgr.Instance.OnDestroy();
+        MusicMgr.Instance.OnDestroy();
+        AssetBundleHelper.Reset();
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,7 +12,7 @@ public class GridManager : MonoBehaviour
     {
         for (int i = 0; i < gridLines.Count; i++) 
         {
-            gridLines[i].Init(clickAction, normalSprite, playerSprite, pcSprite);
+            gridLines[i].Init(clickAction, normalSprite, playerSprite, pcSprite, i);
         }
     }
 

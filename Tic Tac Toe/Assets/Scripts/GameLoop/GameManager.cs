@@ -16,27 +16,24 @@ public class GameManager : BaseManager<GameManager>
     private int[,] grids = new int[3, 3];
     private int curCount;
     private int curCharacter;
-    private Sprite normalSprite;
-    private Sprite playerSprite;
-    private Sprite pcSprite;
+    private bool isFirstPlay;
 
-    public async void Init()
+
+    public void Init()
     {
         playerScore = 0;
         pcScore = 0;
         drawScore = 0;
         curCount = 0;
-        AssetBundleHelper.Init();
-        await AssetBundleHelper.LoadAssetBundle("sprites");
-        normalSprite = (Sprite)await AssetBundleHelper.LoadAsset("NormalGrid", "sprites", typeof(Sprite));
-        playerSprite = (Sprite)await AssetBundleHelper.LoadAsset("PlayerGrid", "sprites", typeof(Sprite));
-        pcSprite = (Sprite)await AssetBundleHelper.LoadAsset("PCGrid", "sprites", typeof(Sprite));
+        isFirstPlay = true;
 
-        UIMgr.Instance.ShowPanel<GamePanel>("GamePanel", E_UI_Layer.Bot, (panel) =>
+        UIMgr.Instance.ShowPanel<GamePanel>("GamePanel", E_UI_Layer.Bot, async (panel) =>
         {
-           panel.Init(OnGridClick, ResetGrid, normalSprite, playerSprite, pcSprite);
+            await panel.Init(OnGridClick, ResetGrid);
+            ResetGrid();
+            EventCenter.Instance.EventTrigger("GamePanelInitComplete");
         });
-        ResetGrid();
+        
     }
 
     public void ResetGrid()
@@ -49,6 +46,11 @@ public class GameManager : BaseManager<GameManager>
             }
         }
         curCount = 0;
+        if (isFirstPlay)
+        {
+            isFirstPlay = false;
+            return;
+        }
         int index = UnityEngine.Random.Range(1, 3);
         if (index == 2)
         {
@@ -65,6 +67,7 @@ public class GameManager : BaseManager<GameManager>
         if (CheckWin(1))
         {
             ++playerScore;
+            MusicMgr.Instance.PladySoundByAB(AudioClipDefine.GameWin, false);
             EndGame(ScoreType.Player, playerScore);
             return;
         }
@@ -80,6 +83,7 @@ public class GameManager : BaseManager<GameManager>
         if (CheckWin(2))
         {
             ++pcScore;
+            MusicMgr.Instance.PladySoundByAB(AudioClipDefine.GameFailed, false);
             EndGame(ScoreType.PC, pcScore);
             return;
         }
@@ -252,18 +256,14 @@ public class GameManager : BaseManager<GameManager>
 
     public void EndGame(ScoreType winer,int value)
     {
-        Debug.Log($"Winer is {winer.ToString()}");
+        //Debug.Log($"Winer is {winer.ToString()}");
         EventCenter.Instance.EventTrigger("OnGameEnd");
         UIMgr.Instance.GetPanel<GamePanel>("GamePanel").Score(winer, value);
     }
 
     public void OnDestroy()
     {
-        AssetBundleHelper.UnLoadAsset("sprites", "NormalGrid");
-        AssetBundleHelper.UnLoadAsset("sprites", "PlayerGrid");
-        AssetBundleHelper.UnLoadAsset("sprites", "PCGrid");
-        AssetBundleHelper.UnLoadAssetBundle("sprites");
-
+        
     }
 
 }

@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -16,6 +18,10 @@ public class MusicMgr : BaseManager<MusicMgr>
     //管理音效的音效列表
     private List<AudioSource> soundList = new List<AudioSource>();
 
+    private Dictionary<string, AudioClip> audioClipDic = new Dictionary<string, AudioClip>();
+
+    private static readonly string ABName = "audio";
+
 
     /// <summary>
     /// 在Update中检测非循环的音效是否播放完成
@@ -23,6 +29,12 @@ public class MusicMgr : BaseManager<MusicMgr>
     public MusicMgr()
     {
         MonoMgr.Instance.AddUpdateListener(Update);
+    }
+
+    public async UniTask Init()
+    {
+        await AssetBundleHelper.LoadAssetBundle(ABName);
+
     }
 
     private void Update()
@@ -33,7 +45,6 @@ public class MusicMgr : BaseManager<MusicMgr>
             {
                 GameObject.Destroy(soundList[i]);
                 soundList.RemoveAt(i);
-
             }
         }
     }
@@ -43,21 +54,39 @@ public class MusicMgr : BaseManager<MusicMgr>
     /// 播放背景音乐
     /// </summary>
     /// <param name="name"></param>
-    public void PlayBKMusic(string name)
+    public void PlayBKMusicByRes(string name)
     {
-        if(bkMusic == null)
+        if (bkMusic == null)
         {
             GameObject obj = new GameObject("BKMusic");
             bkMusic = obj.AddComponent<AudioSource>();
         }
         //异步加载背景音乐 加载完成后 播放
-        ResMgr.Instance.LoadAsync<AudioClip>("Music/BK/" + name,(clip)=> {
+        ResMgr.Instance.LoadAsync<AudioClip>("Music/BK/" + name, (clip) =>
+        {
             bkMusic.clip = clip;
             bkMusic.loop = true;
             bkMusic.volume = bkValue;
             bkMusic.Play();
         });
+    }
 
+    public async void PlayBKMusicByAB(string name)
+    {
+        if (bkMusic == null)
+        {
+            GameObject obj = new GameObject("BKMusic");
+            bkMusic = obj.AddComponent<AudioSource>();
+        }
+        if (!audioClipDic.TryGetValue(name, out var clip))
+        {
+            clip = (AudioClip)await AssetBundleHelper.LoadAsset(name, ABName, typeof(AudioClip));
+            audioClipDic[name] = clip;
+        }
+        bkMusic.clip = clip;
+        bkMusic.loop = true;
+        bkMusic.volume = bkValue;
+        bkMusic.Play();
     }
 
     /// <summary>
@@ -98,14 +127,15 @@ public class MusicMgr : BaseManager<MusicMgr>
     /// <summary>
     /// 播放音效
     /// </summary>
-    public void PladySound(string name, bool isLoop,UnityAction<AudioSource> callBack = null)
+    public void PladySoundByRes(string name, bool isLoop, UnityAction<AudioSource> callBack = null)
     {
-        if(soundObj == null)
+        if (soundObj == null)
         {
             soundObj = new GameObject("Sound");
         }
         //当资源异步加载完后 再添加音效
-        ResMgr.Instance.LoadAsync<AudioClip>("Music/Sound/"+name,(clip)=> {
+        ResMgr.Instance.LoadAsync<AudioClip>("Music/Sound/" + name, (clip) =>
+        {
             AudioSource source = soundObj.AddComponent<AudioSource>();
             source.clip = clip;
             source.loop = isLoop;
@@ -115,7 +145,31 @@ public class MusicMgr : BaseManager<MusicMgr>
             if (callBack != null)
                 callBack(source);
         });
+    }
 
+    /// <summary>
+    /// 播放音效
+    /// </summary>
+    public async void PladySoundByAB(string name, bool isLoop, UnityAction<AudioSource> callBack = null)
+    {
+        if (soundObj == null)
+        {
+            soundObj = new GameObject("Sound");
+        }
+
+        if (!audioClipDic.TryGetValue(name, out var clip))
+        {
+            clip = (AudioClip)await AssetBundleHelper.LoadAsset(name, ABName, typeof(AudioClip));
+            audioClipDic[name] = clip;
+        }
+        AudioSource source = soundObj.AddComponent<AudioSource>();
+        source.clip = clip;
+        source.loop = isLoop;
+        source.volume = soundValue;
+        source.Play();
+        soundList.Add(source);
+        if (callBack != null)
+            callBack(source);
     }
 
     /// <summary>
@@ -145,6 +199,15 @@ public class MusicMgr : BaseManager<MusicMgr>
             source.Stop();
             GameObject.Destroy(source);
         }
+    }
+
+    public void OnDestroy()
+    {
+        foreach (var item in audioClipDic)
+        {
+            AssetBundleHelper.UnLoadAsset(ABName, item.Key);
+        }
+        AssetBundleHelper.UnLoadAssetBundle(ABName);
     }
 
 
