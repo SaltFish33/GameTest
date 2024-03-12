@@ -24,7 +24,7 @@ public class Entry : MonoBehaviour
                     AssetBundleHelper.Init();
                     await SpritesMgr.Instance.Init();
                     await MusicMgr.Instance.Init();
-                    GameManager.Instance.Init();
+                    TicTacToeManager.Instance.Init();
                 },
                 (str) =>
                 {
@@ -36,7 +36,7 @@ public class Entry : MonoBehaviour
                 AssetBundleHelper.Init();
                 await SpritesMgr.Instance.Init();
                 await MusicMgr.Instance.Init();
-                GameManager.Instance.Init();
+                TicTacToeManager.Instance.Init();
             }
         });
 
@@ -45,7 +45,7 @@ public class Entry : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnDestroy();
+        TicTacToeManager.Instance.OnDestroy();
         SpritesMgr.Instance.OnDestroy();
         MusicMgr.Instance.OnDestroy();
         AssetBundleHelper.Reset();

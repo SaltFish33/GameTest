@@ -22,13 +22,14 @@ public class LoadingPanel : BasePanel
     private async UniTaskVoid SetSlider()
     {
         GetControl<Slider>("LoadingBar").value = 1;
-        await UniTask.Delay(500);
+        SetDescrition("更新完成");
+        await UniTask.Delay(2000);
         UIMgr.Instance.HidePanel("LoadingPanel");
     }
 
     public void SetDescrition(string value)
     {
-
+        GetControl<Text>("DescritionText").text = value;
     }
 
 

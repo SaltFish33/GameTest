@@ -24,7 +24,7 @@ public class CreateABCompare
         foreach (var info in fileInofs)
         {
             //没有后缀的才是AB包
-            if (info.Extension == "")
+            if (info.Extension == "" || info.Extension == ".bytes")
             {
                 //拼接一个AB包的信息
                 abCompareInfo += info.Name + " " + info.Length + " " + GetMD5(info.FullName);
