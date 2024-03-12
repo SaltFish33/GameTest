@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GameManager : BaseManager<GameManager>
+public class TicTacToeManager : BaseManager<TicTacToeManager>
 {
     private int playerScore;
     private int pcScore;

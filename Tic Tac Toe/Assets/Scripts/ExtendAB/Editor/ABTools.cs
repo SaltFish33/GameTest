@@ -276,7 +276,7 @@ public class ABTools : EditorWindow
         {
             //没有后缀的才是AB包,还有需要获取资源对比文件 格式是.txt
             //该文件夹中只有对比文件的格式是txt
-            if (info.Extension == ".assetbundle" || info.Extension == ".txt")
+            if (info.Extension == "" || info.Extension == ".txt")
             {
                 //上传该文件
                 FtpUploadFile(info.FullName, info.Name);
