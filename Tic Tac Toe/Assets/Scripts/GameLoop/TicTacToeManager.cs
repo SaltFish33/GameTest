@@ -17,6 +17,7 @@ public class TicTacToeManager : BaseManager<TicTacToeManager>
     private int curCount;
     private int curCharacter;
     private bool isFirstPlay;
+    private int bestX, bestY;
 
 
     public void Init()
@@ -105,7 +106,7 @@ public class TicTacToeManager : BaseManager<TicTacToeManager>
         UIMgr.Instance.GetPanel<GamePanel>("GamePanel").ChooseGrid(new Vector2Int(bestX, bestY));
     }
 
-    int bestX, bestY;
+    
 
     /// <summary>
     /// 回溯求最优解
@@ -133,7 +134,7 @@ public class TicTacToeManager : BaseManager<TicTacToeManager>
         {
             bestValue = int.MaxValue;
         }
-
+        List<(int, int)> points = new List<(int, int)>();
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
@@ -157,15 +158,21 @@ public class TicTacToeManager : BaseManager<TicTacToeManager>
                     }
                     UndoTryPlay(i, j);
 
-                    if (value >= bestValue)
+                    if (value > bestValue && curCharacter == 2)
                     {
+                        points.Clear();
+                        points.Add((i, j));
                         bestValue = value;
-                        //回到最上层，设置选择坐标
-                        if (depth == curCount)
-                        {
-                            bestX = i;
-                            bestY = j;
-                        }
+                        ////回到最上层，设置选择坐标
+                        //if (depth == curCount)
+                        //{
+                        //    bestX = i;
+                        //    bestY = j;
+                        //}
+                    }
+                    else if(value == bestValue && curCharacter == 2)
+                    {
+                        points.Add((i, j));
                     }
 
                     alpha = Mathf.Max(alpha, bestValue);
@@ -207,6 +214,8 @@ public class TicTacToeManager : BaseManager<TicTacToeManager>
                 grids[i, j] = 0; 
             }
         }
+        if (points.Count > 0 && depth == curCount)
+            (bestX, bestY) = points[UnityEngine.Random.Range(0, points.Count)];
 
         return bestValue;
     }
