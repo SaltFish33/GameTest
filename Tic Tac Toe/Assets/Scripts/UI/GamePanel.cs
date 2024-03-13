@@ -22,11 +22,11 @@ public class GamePanel : BasePanel
     private int audioType;
     public async UniTask Init(UnityAction<Vector2Int> gridClickAction, UnityAction resetAction)
     {
-        normalSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.NormalGrid);
-        playerSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.PlayerGrid);
-        pcSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.PCGrid);
-        audioOnSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.AudioOn);
-        audioOffSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.AudioOff);
+        normalSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.NormalGrid, AltasDefine.GamePanel);
+        playerSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.PlayerGrid, AltasDefine.GamePanel);
+        pcSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.PCGrid, AltasDefine.GamePanel);
+        audioOnSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.AudioOn, AltasDefine.GamePanel);
+        audioOffSprite = await SpritesMgr.Instance.LoadSprite(SpriteDefine.AudioOff, AltasDefine.GamePanel);
 
         gridManager.Init(gridClickAction, normalSprite, playerSprite, pcSprite);
         scoring.Init(GetControl<Text>("PlayerScore"),GetControl<Text>("PCScore"),GetControl<Text>("DrawScore"));

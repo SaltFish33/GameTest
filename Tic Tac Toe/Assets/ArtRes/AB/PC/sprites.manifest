@@ -1,28 +1,31 @@
 ManifestFileVersion: 0
-CRC: 1003082210
+CRC: 4226856057
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1baf2f876ca65cced5f99019c0daed49
+    Hash: 136a824d8d19e577a798dde3c5633711
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2d8df09e698f722ada1caa03d3413830
+    Hash: 033fafe2c9f6c610c3a734393882fd4c
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 1baf2f876ca65cced5f99019c0daed49
+    Hash: 136a824d8d19e577a798dde3c5633711
 HashAppended: 0
 ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Bundles/Sprites/NormalGrid.png
-- Assets/Bundles/Sprites/AudioOff.png
-- Assets/Bundles/Sprites/Reset.png
-- Assets/Bundles/Sprites/AudioOn.png
-- Assets/Bundles/Sprites/BG.png
-- Assets/Bundles/Sprites/PlayerGrid.png
-- Assets/Bundles/Sprites/PCGrid.png
+- Assets/ArtRes/Sprites/NormalGrid.png
+- Assets/Bundles/Sprites/GamePanel.spriteatlasv2
+- Assets/ArtRes/Sprites/AudioOff.png
+- Assets/ArtRes/Sprites/Reset.png
+- Assets/ArtRes/Sprites/AudioOn.png
+- Assets/ArtRes/Sprites/BG.png
+- Assets/ArtRes/Sprites/PlayerGrid.png
+- Assets/ArtRes/Sprites/PCGrid.png
 Dependencies: []
