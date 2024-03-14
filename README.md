@@ -2,7 +2,7 @@
 
 ## 游戏面板
 
-![GamePanel](F:\KuRoGameTest\images\GamePanel.png)
+![GamePanel](https://github.com/SaltFish33/KuRoGameTest/blob/main/images/GamePanel.png)
 
 
 
