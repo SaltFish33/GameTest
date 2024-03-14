@@ -20,7 +20,11 @@ public class Entry : MonoBehaviour
             {
                 ABUpdateMgr.Instance.CheckUpdate(async (isOver) =>
                 {
-                    if (!isOver) return;
+                    if (!isOver)
+                    {
+                        panel.SetDescrition("¸üĞÂÊ§°Ü,Çë¼ì²éÍøÂç");
+                        return;
+                    }
                     AssetBundleHelper.Init();
                     await SpritesMgr.Instance.Init();
                     await MusicMgr.Instance.Init();
